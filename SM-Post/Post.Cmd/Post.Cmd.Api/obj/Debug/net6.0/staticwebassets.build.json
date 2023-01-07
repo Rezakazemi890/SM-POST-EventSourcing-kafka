@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "eVZkAjTNYOZj7Jus79o9Nnuue/kIosJQAYzow1PSLTk=",
+  "Source": "Post.Cmd.Api",
+  "BasePath": "_content/Post.Cmd.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

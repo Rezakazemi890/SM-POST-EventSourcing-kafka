@@ -1,0 +1,15 @@
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/bin/Debug/net6.0/Post.Common.deps.json
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/bin/Debug/net6.0/Post.Common.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/bin/Debug/net6.0/Post.Common.pdb
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/bin/Debug/net6.0/CQRS.Core.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/bin/Debug/net6.0/CQRS.Core.pdb
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.csproj.AssemblyReference.cache
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.GeneratedMSBuildEditorConfig.editorconfig
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.AssemblyInfoInputs.cache
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.AssemblyInfo.cs
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.csproj.CoreCompileInputs.cache
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.csproj.CopyComplete
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/refint/Post.Common.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/Post.Common.pdb
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/obj/Debug/net6.0/ref/Post.Common.dll
