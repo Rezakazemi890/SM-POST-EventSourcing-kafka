@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Lbd4addXVGisnm6vYO3IklBxsZ32xLNdSgKi6gIyCZL02YZhNN3NemOWbpMv32LN2fRq9bdfLZ8adqXtDJXpCg==",
+  "dgSpecHash": "oszXYbq3OpJNNrMG1zWd7qW7ypFysKFqULbzuToN5bw7QJNSdccEuJRJcSScXo9+npwok+WGk5Q6GOr/gnz3KQ==",
   "success": true,
   "projectFilePath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Infrastructure/Post.Query.Infrastructure.csproj",
   "expectedPackageFiles": [

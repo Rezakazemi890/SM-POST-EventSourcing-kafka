@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CgdphFFFmSyahwAsEwdrxv53Js8TZFPtA7sOd9V5dHRpakNh3czkJhxlqcdDFx+wVmqrUuWhlyYFS1wbnTwiWw==",
+  "dgSpecHash": "BqYrMnQwrAdPGMdyXbKyEaauCcIzp255ERi18809GKH/mbeTgFICw8q88ryUkHCrEHeJazPEXYLqnB4/McM+rg==",
   "success": true,
   "projectFilePath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj",
   "expectedPackageFiles": [
