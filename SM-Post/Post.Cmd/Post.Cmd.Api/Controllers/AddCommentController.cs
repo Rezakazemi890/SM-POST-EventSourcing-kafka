@@ -35,7 +35,7 @@ public class AddCommentController : ControllerBase
             _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
             return BadRequest(new BaseResponse
             {
-                Message = ex.Message
+                Message = ex.Message 
             });
         }
         catch (AggregateNotFoundException ex)
