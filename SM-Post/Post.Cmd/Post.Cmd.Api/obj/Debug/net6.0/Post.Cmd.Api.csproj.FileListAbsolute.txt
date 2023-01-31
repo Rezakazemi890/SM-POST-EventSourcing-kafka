@@ -75,3 +75,8 @@
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/Post.Cmd.Api.pdb
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/Post.Cmd.Api.genruntimeconfig.cache
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/ref/Post.Cmd.Api.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/staticwebassets/msbuild.Post.Cmd.Api.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/staticwebassets/msbuild.build.Post.Cmd.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Post.Cmd.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Post.Cmd.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/obj/Debug/net6.0/staticwebassets.pack.json

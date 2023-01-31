@@ -113,3 +113,8 @@
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/ref/Post.Query.Api.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Castle.Core.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Proxies.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.Post.Query.Api.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.build.Post.Query.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Post.Query.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Post.Query.Api.props
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets.pack.json

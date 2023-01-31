@@ -20,7 +20,7 @@ public class EditCommentController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> AddCommentAsync(Guid id, EditCommentCommand command)
+    public async Task<ActionResult> EditCommentAsync(Guid id, EditCommentCommand command)
     {
         try
         {
@@ -58,5 +58,4 @@ public class EditCommentController : ControllerBase
             });
         }
     }
-
 }
