@@ -8,19 +8,19 @@ namespace Post.Cmd.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
-public class AddCommentController : ControllerBase
+public class EditCommentController : ControllerBase
 {
-    private readonly ILogger<AddCommentController> _logger;
+    private readonly ILogger<EditCommentController> _logger;
     private readonly ICommandDispatcher _commandDispatcher;
 
-    public AddCommentController(ILogger<AddCommentController> logger, ICommandDispatcher commandDispatcher)
+    public EditCommentController(ILogger<EditCommentController> logger, ICommandDispatcher commandDispatcher)
     {
         _logger = logger;
         _commandDispatcher = commandDispatcher;
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> AddCommentAsync(Guid id, AddCommentCommand command)
+    public async Task<ActionResult> AddCommentAsync(Guid id, EditCommentCommand command)
     {
         try
         {
@@ -29,7 +29,7 @@ public class AddCommentController : ControllerBase
 
             return Ok(new BaseResponse
             {
-                Message = "Add Comment  Request Compeleted Successfully"
+                Message = "Edit Comment  Request Compeleted Successfully"
             });
         }
         catch (InvalidOperationException ex)
@@ -37,7 +37,7 @@ public class AddCommentController : ControllerBase
             _logger.Log(LogLevel.Warning, ex, "Client made a bad request!");
             return BadRequest(new BaseResponse
             {
-                Message = ex.Message 
+                Message = ex.Message
             });
         }
         catch (AggregateNotFoundException ex)
@@ -50,7 +50,7 @@ public class AddCommentController : ControllerBase
         }
         catch (Exception ex)
         {
-            const string SAFE_ERROR_MESSAGE = "Error while processing request add comment to post!";
+            const string SAFE_ERROR_MESSAGE = "Error while processing request Edit comment to post!";
             _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
             return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
             {
