@@ -7,7 +7,7 @@ using Post.Common.DTOs;
 namespace Post.Cmd.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class DeletePostController : ControllerBase
 {
     private readonly ILogger<DeletePostController> _logger;
