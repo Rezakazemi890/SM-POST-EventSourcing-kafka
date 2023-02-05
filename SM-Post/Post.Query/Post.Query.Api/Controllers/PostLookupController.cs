@@ -41,7 +41,7 @@ public class PostLookupController : ControllerBase
         try
         {
             var posts = await _queryDispatcher.SendAsync(new FindPostByIdQuery() { Id = postId });
-            if (posts == null | !posts.Any())
+            if (posts == null || !posts.Any())
             {
                 return NoContent();
             }
@@ -105,7 +105,7 @@ public class PostLookupController : ControllerBase
 
     private ActionResult NormalResponse(List<PostEntity>? posts)
     {
-        if (posts == null | !posts.Any())
+        if (posts == null || !posts.Any())
         {
             return NoContent();
         }
@@ -113,7 +113,7 @@ public class PostLookupController : ControllerBase
         return Ok(new PostLookupResponse
         {
             Posts = posts,
-            Message = $"Successfully returned {count} posts {(count > 1 ? "s" : string.Empty)}!"
+            Message = $"Successfully returned {count} post{(count > 1 ? "s" : string.Empty)}!"
         });
     }
 
