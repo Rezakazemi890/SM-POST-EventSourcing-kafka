@@ -376,3 +376,10 @@ SM-Post/Post.Query/Post.Query.Infrastructure/obj/Debug/net6.0/Post.Query.Infrast
 SM-Post/Post.Query/Post.Query.Infrastructure/obj/Debug/net6.0/Post.Query.Infrastructure.pdb
 SM-Post/Post.Query/Post.Query.Infrastructure/obj/Debug/net6.0/ref/Post.Query.Infrastructure.dll
 SM-Post/Post.Query/Post.Query.Infrastructure/obj/Debug/net6.0/refint/Post.Query.Infrastructure.dll
+SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Post.Query.Api.dll
+SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Post.Query.Api.pdb
+SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/Post.Query.Api.csproj.CoreCompileInputs.cache
+SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/Post.Query.Api.dll
+SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/Post.Query.Api.pdb
+SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/ref/Post.Query.Api.dll
+SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/refint/Post.Query.Api.dll
