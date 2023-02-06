@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj" />
-    <ProjectReference Include="..\Post.Query.Domain\Post.Query.Domain.csproj" />
+    <ProjectReference Include="..\..\..\CQRS-ES\CQRS.Core\CQRS.Core.csproj"/>
+    <ProjectReference Include="..\Post.Query.Domain\Post.Query.Domain.csproj"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="Confluent.Kafka" Version="1.9.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10"/>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1"/>
+    <PackageReference Include="Confluent.Kafka" Version="1.9.3"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="6.0.2"/>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.8"/>
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>

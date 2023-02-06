@@ -118,3 +118,6 @@
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildMultiTargeting.Post.Query.Api.props
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets/msbuild.buildTransitive.Post.Query.Api.props
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/obj/Debug/net6.0/staticwebassets.pack.json
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/appsettings.Development.PostgreSQL.json
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Npgsql.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/bin/Debug/net6.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll

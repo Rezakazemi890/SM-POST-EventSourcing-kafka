@@ -47,6 +47,7 @@
                 "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
             },
             "env": {
+                // "ASPNETCORE_ENVIRONMENT": "Development.PostgreSQL",
                 "ASPNETCORE_ENVIRONMENT": "Development",
                 "ASPNETCORE_URLS":"http://localhost:5011",
                 "KAFKA_TOPIC" : "SocialMediaPostEvents"

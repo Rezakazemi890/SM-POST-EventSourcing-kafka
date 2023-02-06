@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Post.Query.Domain.Entities;
 
-[Table("Post")]
+[Table("Post", Schema = "dbo")]
 public class PostEntity
 {
     [Key]
@@ -12,5 +12,5 @@ public class PostEntity
     public DateTime DatePosted { get; set; }
     public string Message { get; set; }
     public int Likes { get; set; }
-    public virtual ICollection<CommentEntity> Comments { get; set;}
+    public virtual ICollection<CommentEntity> Comments { get; set; }
 }
