@@ -10,6 +10,8 @@ using Post.Query.Infrastructure.DataAccess;
 using Post.Query.Infrastructure.Dispatchers;
 using Post.Query.Infrastructure.Handlers;
 using Post.Query.Infrastructure.Repositories;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +58,13 @@ dispatcher.RegisterHandler<FindPostWithLikesQuery>(queryHandler.HandleAsync);
 builder.Services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
 
 builder.Services.AddControllers();
+
+//serilog config
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Warning()
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 builder.Services.AddHostedService<ConsumerHostedService>();
 

@@ -14,6 +14,8 @@ using Post.Cmd.Infrastructure.Producers;
 using Post.Cmd.Infrastructure.Repositories;
 using Post.Cmd.Infrastructure.Stores;
 using Post.Common.Events;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 
@@ -55,6 +57,14 @@ commandDispatcher.RegisterHandler<AddCommentCommand>(commandHandler.HandleAsync)
 builder.Services.AddSingleton<ICommandDispatcher>(_ => commandDispatcher);
 
 builder.Services.AddControllers();
+
+//serilog config
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Warning()
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .CreateLogger();
+builder.Host.UseSerilog();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

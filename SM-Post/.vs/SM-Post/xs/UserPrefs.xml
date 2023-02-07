@@ -1,22 +1,29 @@
-﻿<Properties StartupConfiguration="{CF7C05FF-2E24-472E-AA58-90D1E3908314}|Default">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+﻿<Properties StartupConfiguration="{9CBCFA4E-D3F0-4F54-84B5-DCCA33152E1C}|Default">
   <MonoDevelop.Ide.ItemProperties.Post.Cmd.Post.Cmd.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Post.Query/Post.Query.Api/Controllers/PostLookupController.cs">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Post.Cmd/Post.Cmd.Infrastructure/Producers/EventProducer.cs">
     <Files>
-      <File FileName="Post.Query/Post.Query.Api/Controllers/PostLookupController.cs" Line="1" Column="1" />
+      <File FileName="Post.Query/Post.Query.Infrastructure/Consumers/EventConsumer.cs" Line="25" Column="40" />
+      <File FileName="Post.Cmd/Post.Cmd.Infrastructure/Producers/EventProducer.cs" Line="9" Column="44" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="SM-Post" expanded="True">
+            <Node name="Post.Cmd" expanded="True">
+              <Node name="Post.Cmd.Infrastructure" expanded="True">
+                <Node name="Producers" expanded="True">
+                  <Node name="EventProducer.cs" selected="True" />
+                </Node>
+              </Node>
+            </Node>
             <Node name="Post.Query" expanded="True">
               <Node name="Post.Query.Api" expanded="True">
-                <Node name="Controllers" expanded="True">
-                  <Node name="PostLookupController.cs" selected="True" />
-                </Node>
+                <Node name="Controllers" expanded="True" />
+              </Node>
+              <Node name="Post.Query.Infrastructure" expanded="True">
+                <Node name="Consumers" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -25,5 +32,6 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Post.Query.Post.Query.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
 </Properties>
