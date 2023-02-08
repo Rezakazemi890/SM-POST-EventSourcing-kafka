@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using CQRS.Core.Infrastructure;
@@ -10,6 +11,9 @@ using Post.Query.Infrastructure.DataAccess;
 using Post.Query.Infrastructure.Dispatchers;
 using Post.Query.Infrastructure.Handlers;
 using Post.Query.Infrastructure.Repositories;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
+using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +60,50 @@ dispatcher.RegisterHandler<FindPostWithLikesQuery>(queryHandler.HandleAsync);
 builder.Services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
 
 builder.Services.AddControllers();
+
+//serilog config
+IConfigurationRoot? seriLogConfig = null;
+if (builder.Environment.IsDevelopment())
+{
+    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.Development.json").Build();
+}
+else
+{
+    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.json").Build();
+}
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(seriLogConfig)
+    .CreateLogger();
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+//    .CreateLogger();
+
+//var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
+//columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
+//columnOpt.AdditionalColumns = new Collection<SqlColumn>{
+//    new SqlColumn
+//    {
+//        ColumnName = "RequestUri",
+//        AllowNull = true,
+//        DataType = System.Data.SqlDbType.NVarChar,
+//        DataLength = 2048,
+//        PropertyName = "Uri"
+//    }
+//};
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.MSSqlServer(
+//        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
+//        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
+//        columnOptions: columnOpt
+//    )
+//    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 builder.Services.AddHostedService<ConsumerHostedService>();
 
