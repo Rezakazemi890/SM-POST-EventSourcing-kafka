@@ -61,32 +61,47 @@ builder.Services.AddSingleton<ICommandDispatcher>(_ => commandDispatcher);
 builder.Services.AddControllers();
 
 //serilog config
+
+IConfigurationRoot? seriLogConfig = null;
+if (builder.Environment.IsDevelopment())
+{
+    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.Development.json").Build();
+}
+else
+{
+    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.json").Build();
+}
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(seriLogConfig)
+    .CreateLogger();
+
 //Log.Logger = new LoggerConfiguration()
 //    .MinimumLevel.Warning()
 //    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
 //    .CreateLogger();
 
-var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
-columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
-columnOpt.AdditionalColumns = new Collection<SqlColumn>{
-    new SqlColumn
-    {
-        ColumnName = "RequestUri",
-        AllowNull = true,
-        DataType = System.Data.SqlDbType.NVarChar,
-        DataLength = 2048,
-        PropertyName = "Uri"
-    }
-};
+//var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
+//columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
+//columnOpt.AdditionalColumns = new Collection<SqlColumn>{
+//    new SqlColumn
+//    {
+//        ColumnName = "RequestUri",
+//        AllowNull = true,
+//        DataType = System.Data.SqlDbType.NVarChar,
+//        DataLength = 2048,
+//        PropertyName = "Uri"
+//    }
+//};
 
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Warning()
-    .WriteTo.MSSqlServer(
-        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
-        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
-        columnOptions:columnOpt
-    )
-    .CreateLogger();
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.MSSqlServer(
+//        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
+//        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
+//        columnOptions:columnOpt
+//    )
+//    .CreateLogger();
 
 builder.Host.UseSerilog();
 
