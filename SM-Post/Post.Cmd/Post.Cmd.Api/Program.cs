@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Confluent.Kafka;
 using CQRS.Core.Domain;
 using CQRS.Core.Events;
@@ -15,6 +16,7 @@ using Post.Cmd.Infrastructure.Repositories;
 using Post.Cmd.Infrastructure.Stores;
 using Post.Common.Events;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -51,7 +53,7 @@ commandDispatcher.RegisterHandler<EditCommentCommand>(commandHandler.HandleAsync
 commandDispatcher.RegisterHandler<LikePostCommand>(commandHandler.HandleAsync);
 commandDispatcher.RegisterHandler<RemoveCommentCommand>(commandHandler.HandleAsync);
 commandDispatcher.RegisterHandler<DeletePostCommand>(commandHandler.HandleAsync);
-commandDispatcher.RegisterHandler<RestoreReadDbCommand >(commandHandler.HandleAsync);
+commandDispatcher.RegisterHandler<RestoreReadDbCommand>(commandHandler.HandleAsync);
 commandDispatcher.RegisterHandler<AddCommentCommand>(commandHandler.HandleAsync);
 
 builder.Services.AddSingleton<ICommandDispatcher>(_ => commandDispatcher);
@@ -59,10 +61,33 @@ builder.Services.AddSingleton<ICommandDispatcher>(_ => commandDispatcher);
 builder.Services.AddControllers();
 
 //serilog config
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+//    .CreateLogger();
+
+var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
+columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
+columnOpt.AdditionalColumns = new Collection<SqlColumn>{
+    new SqlColumn
+    {
+        ColumnName = "RequestUri",
+        AllowNull = true,
+        DataType = System.Data.SqlDbType.NVarChar,
+        DataLength = 2048,
+        PropertyName = "Uri"
+    }
+};
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Warning()
-    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .WriteTo.MSSqlServer(
+        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
+        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
+        columnOptions:columnOpt
+    )
     .CreateLogger();
+
 builder.Host.UseSerilog();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

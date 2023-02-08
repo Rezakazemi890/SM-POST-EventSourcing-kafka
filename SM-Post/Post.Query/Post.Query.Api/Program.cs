@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using CQRS.Core.Infrastructure;
@@ -11,6 +12,7 @@ using Post.Query.Infrastructure.Dispatchers;
 using Post.Query.Infrastructure.Handlers;
 using Post.Query.Infrastructure.Repositories;
 using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,10 +62,34 @@ builder.Services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
 builder.Services.AddControllers();
 
 //serilog config
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+//    .CreateLogger();
+
+
+var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
+columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
+columnOpt.AdditionalColumns = new Collection<SqlColumn>{
+    new SqlColumn
+    {
+        ColumnName = "RequestUri",
+        AllowNull = true,
+        DataType = System.Data.SqlDbType.NVarChar,
+        DataLength = 2048,
+        PropertyName = "Uri"
+    }
+};
+
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Warning()
-    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .WriteTo.MSSqlServer(
+        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
+        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
+        columnOptions: columnOpt
+    )
     .CreateLogger();
+
 builder.Host.UseSerilog();
 
 builder.Services.AddHostedService<ConsumerHostedService>();
