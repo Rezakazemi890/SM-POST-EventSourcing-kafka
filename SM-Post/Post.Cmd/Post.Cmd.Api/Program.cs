@@ -76,11 +76,6 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(seriLogConfig)
     .CreateLogger();
 
-//Log.Logger = new LoggerConfiguration()
-//    .MinimumLevel.Warning()
-//    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
-//    .CreateLogger();
-
 //var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
 //columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
 //columnOpt.AdditionalColumns = new Collection<SqlColumn>{
