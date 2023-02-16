@@ -21,13 +21,12 @@ namespace Post.Authorization.Api.Controllers
     {
         private readonly ILogger<AuthenticateController> _logger;
         private IConfiguration _config;
-        private readonly AuthorizationDbContext _dbContext;
+        
 
-        public AuthenticateController(ILogger<AuthenticateController> logger, IConfiguration config, AuthorizationDbContext dbContext)
+        public AuthenticateController(ILogger<AuthenticateController> logger, IConfiguration config)
         {
             _logger = logger;
             _config = config;
-            _dbContext = dbContext;
         }
 
         private string GenerateJSONWebToken(LoginModel userInfo)
@@ -82,7 +81,7 @@ namespace Post.Authorization.Api.Controllers
             {
                 string tokenString = GenerateJSONWebToken(data);
                 if (!string.IsNullOrEmpty(tokenString))
-                    response = Ok(new { Token = tokenString, Message = "Success" });
+                    response = Ok(new { Token = tokenString, Message = "Success Authentication" });
             }
             return response;
         }

@@ -18,9 +18,11 @@
   <ItemGroup>
     <None Remove="Base\" />
     <None Remove="DataAccess\" />
+    <None Remove="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Base\" />
     <Folder Include="DataAccess\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 </Project>
