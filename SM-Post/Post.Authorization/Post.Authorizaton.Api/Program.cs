@@ -6,6 +6,8 @@ using Post.Authorization.Domain.Entities;
 using Post.Authorization.Infrastructure.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Post.Authorization.Domain.Repositories;
+using Post.Authorization.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,7 @@ var dataContext = builder.Services.BuildServiceProvider().GetRequiredService<Aut
 dataContext.Database.EnsureCreated();
 
 // Add services to the container.
+builder.Services.AddScoped<IPostUserRepository, PostUserRepository>();
 
 builder.Services.AddControllers();
 builder.Services.AddMvc();

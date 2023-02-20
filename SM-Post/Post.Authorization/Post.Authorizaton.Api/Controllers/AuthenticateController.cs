@@ -9,9 +9,14 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Post.Authorization.Api.DTOs;
+using Post.Authorization.Domain.Entities;
 using Post.Authorization.Domain.Model;
+using Post.Authorization.Domain.Repositories;
 using Post.Authorization.Infrastructure.Base;
 using Post.Authorization.Infrastructure.DataAccess;
+using Post.Common.DTOs;
+using Post.Common.Utils;
 
 namespace Post.Authorization.Api.Controllers
 {
@@ -21,12 +26,13 @@ namespace Post.Authorization.Api.Controllers
     {
         private readonly ILogger<AuthenticateController> _logger;
         private IConfiguration _config;
-        
+        private readonly IPostUserRepository _postUserRepository;
 
-        public AuthenticateController(ILogger<AuthenticateController> logger, IConfiguration config)
+        public AuthenticateController(ILogger<AuthenticateController> logger, IConfiguration config, IPostUserRepository postUserRepository)
         {
             _logger = logger;
             _config = config;
+            _postUserRepository = postUserRepository;
         }
 
         private string GenerateJSONWebToken(LoginModel userInfo)
@@ -93,6 +99,51 @@ namespace Post.Authorization.Api.Controllers
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
             return new string[] { accessToken };
+        }
+
+        [AllowAnonymous]
+        [HttpPost(nameof(RegisterUser))]
+        public async Task<ActionResult> RegisterUser([FromBody] LoginModel data)
+        {
+            try
+            {
+                var newUser = new PostUser
+                {
+                    UserName = data.UserName,
+                    PasswordHash = SecurePasswordHasher.Hash(data.Password),
+                };
+
+                await _postUserRepository.CreateUserAsync(newUser);
+
+                return NormalResponse("Register User");
+            }
+            catch (Exception ex)
+            {
+                const string SAFE_ERROR_MESSAGE = "Error while processing register user !";
+                return ErrorResponse(ex, SAFE_ERROR_MESSAGE);
+            }
+        }
+
+        private ActionResult NormalResponse(string operation)
+        {
+            if (operation == null || string.IsNullOrEmpty(operation))
+            {
+                return NoContent();
+            }
+            return Ok(new AuthenticationResponse
+
+            {
+                Message = $"{operation} Successfully Done!"
+            });
+        }
+
+        private ActionResult ErrorResponse(Exception ex, string SAFE_ERROR_MESSAGE)
+        {
+            _logger.LogError(ex, SAFE_ERROR_MESSAGE);
+            return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
+            {
+                Message = SAFE_ERROR_MESSAGE
+            });
         }
     }
 }
