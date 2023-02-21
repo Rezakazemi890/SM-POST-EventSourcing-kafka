@@ -19,10 +19,12 @@ namespace Post.Authorization.Infrastructure.Repositories
 
         public async Task CreateUserAsync(PostUser postUser)
         {
+            if (await GetUserByUserName(postUser.UserName) != null)
+                throw new InvalidDataException("A user with the entered username exists!");
             using AuthorizationDbContext context = _dbContextFactory.CreateDbContext();
             context.Users.Add(postUser);
 
-            _ = await context.SaveChangesAsync();
+            _ = await context.SaveChangesAsync();            
         }
 
         public async Task DeleteUserAsync(string postUserId)
