@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Reflection;
 using Confluent.Kafka;
 using CQRS.Core.Consumers;
 using CQRS.Core.Infrastructure;
@@ -12,6 +13,10 @@ using Post.Query.Infrastructure.Dispatchers;
 using Post.Query.Infrastructure.Handlers;
 using Post.Query.Infrastructure.Repositories;
 using Serilog;
+using Serilog.Events;
+using Serilog.Formatting.Json;
+using Serilog.Sinks.Elasticsearch;
+using Serilog.Sinks.File;
 using Serilog.Sinks.MSSqlServer;
 using Serilog.Sinks.SystemConsole.Themes;
 
@@ -61,25 +66,77 @@ builder.Services.AddSingleton<IQueryDispatcher<PostEntity>>(_ => dispatcher);
 
 builder.Services.AddControllers();
 
-//serilog config
-IConfigurationRoot? seriLogConfig = null;
-if (builder.Environment.IsDevelopment())
+#region serilog config
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true)
+    .Build();
+
+ConfigureLogging(environment, configuration);
+
+
+static void ConfigureLogging(string environment, IConfigurationRoot configuration)
 {
-    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.Development.json").Build();
-}
-else
-{
-    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.json").Build();
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+        .Enrich.FromLogContext()
+        .Enrich.WithEnvironmentName()
+        .Enrich.WithMachineName()
+        .WriteTo.Console()
+        .WriteTo.Debug()
+        .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticSearch:Uri"]))
+        {
+            AutoRegisterTemplate = true,
+            AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6,
+            IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name!.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+        })
+        .ReadFrom.Configuration(configuration)
+        .CreateLogger();
 }
 
-Log.Logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(seriLogConfig)
-    .CreateLogger();
+//For Elastic Old
 
 //Log.Logger = new LoggerConfiguration()
-//    .MinimumLevel.Warning()
-//    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+//    .MinimumLevel.Debug()
+//    .WriteTo.Console(theme: SystemConsoleTheme.Literate)
+//    .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(builder.Configuration.GetConnectionString("elasticsearch"))) // for the docker-compose implementation
+//    {
+//        AutoRegisterTemplate = true,
+//        OverwriteTemplate = true,
+//        DetectElasticsearchVersion = true,
+//        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+//        NumberOfReplicas = 1,
+//        NumberOfShards = 2,
+//        //BufferBaseFilename = "./buffer",
+//        //RegisterTemplateFailure = RegisterTemplateRecovery.FailSink,
+//        FailureCallback = e => Console.WriteLine("Unable to submit event " + e.MessageTemplate),
+//        EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog |
+//                           EmitEventFailureHandling.WriteToFailureSink |
+//                           EmitEventFailureHandling.RaiseCallback,
+//        FailureSink = new FileSink("./fail-{Date}.txt", new JsonFormatter(), null, null)
+//    })
 //    .CreateLogger();
+
+
+
+//with configuration
+
+//IConfigurationRoot? seriLogConfig = null;
+//if (builder.Environment.IsDevelopment())
+//{
+//    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.Development.json").Build();
+//}
+//else
+//{
+//    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.json").Build();
+//}
+
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(seriLogConfig)
+//    .CreateLogger();
+
 
 //var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
 //columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
@@ -99,11 +156,12 @@ Log.Logger = new LoggerConfiguration()
 //    .WriteTo.MSSqlServer(
 //        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
 //        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
-//        columnOptions: columnOpt
+//        columnOptions:columnOpt
 //    )
 //    .CreateLogger();
 
 builder.Host.UseSerilog();
+#endregion
 
 builder.Services.AddHostedService<ConsumerHostedService>();
 

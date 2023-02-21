@@ -41,6 +41,7 @@ public class RestoreReadDbController : ControllerBase
         {
             const string SAFE_ERROR_MESSAGE = "Error while processing request to restore read Db!";
             _logger.Log(LogLevel.Error, ex, SAFE_ERROR_MESSAGE);
+            _logger.LogError(ex, SAFE_ERROR_MESSAGE);
             return StatusCode(StatusCodes.Status500InternalServerError, new BaseResponse
             {
                 Message = SAFE_ERROR_MESSAGE
