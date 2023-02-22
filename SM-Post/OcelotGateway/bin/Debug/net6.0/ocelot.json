@@ -1,0 +1,105 @@
+﻿{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5003"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5010
+        }
+      ],
+      "UpstreamPathTemplate": "/api/authorization/{version}/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "Authorization.Api",
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5011
+        }
+      ],
+      "UpstreamPathTemplate": "/api/postcmd/{version}/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "Post.Cmd.Api",
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5012
+        }
+      ],
+      "UpstreamPathTemplate": "/api/postquery/{version}/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "SwaggerKey": "Post.Query.Api",
+      "FileCacheOptions": {
+        "TtlSeconds": 1
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 3
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Authorization.Api",
+      "Config": [
+        {
+          "Name": "Authorization.Api",
+          "Version": "v1",
+          "Url": "https://localhost:5010/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Post.Cmd.Api",
+      "Config": [
+        {
+          "Name": "Post.Cmd.Api",
+          "Version": "v1",
+          "Url": "https://localhost:5011/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Post.Query.Api",
+      "Config": [
+        {
+          "Name": "Post.Query.Api",
+          "Version": "v1",
+          "Url": "https://localhost:5012/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

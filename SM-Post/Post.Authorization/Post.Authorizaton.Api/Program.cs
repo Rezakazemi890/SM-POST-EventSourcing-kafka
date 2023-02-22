@@ -236,7 +236,7 @@ builder.Host.UseSerilog();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();
@@ -252,7 +252,7 @@ app.UseAuthentication();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authorization.Api");
 
 });
 
