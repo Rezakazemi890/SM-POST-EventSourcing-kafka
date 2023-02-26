@@ -11,6 +11,7 @@
     <PackageReference Include="Ocelot" Version="18.0.0" />
     <PackageReference Include="Ocelot.Cache.CacheManager" Version="18.0.0" />
     <PackageReference Include="MMLib.SwaggerForOcelot" Version="6.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,6 +5,9 @@ using Microsoft.OpenApi.Models;
 using Ocelot.Middleware;
 using Ocelot.Values;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +18,17 @@ builder.Services.AddOcelot(builder.Configuration)
     {
         x.WithDictionaryHandle();
     });
+
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+});
 
 builder.Services.AddSwaggerForOcelot(builder.Configuration, (swagger) =>
 {
@@ -40,47 +54,77 @@ builder.Services.AddSwaggerForOcelot(builder.Configuration, (swagger) =>
             Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
         });
         opt.AddSecurityRequirement(new OpenApiSecurityRequirement
-        {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                },
-                Scheme = "Bearer",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-            },
-            new string[] { }
-        }
-        });
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
+
+                    }
+                });
     });
 });
 
+#region For use identity Authentication
+//Key
+var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Jwt").GetRequiredSection("Key").Value);
+
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddAuthentication(x =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = context =>
+        {
+            return Task.CompletedTask;
+        }
+    };
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = false,
+        ValidIssuer = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
+        //ValidAudience = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
+    };
 });
+#endregion
+
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
+// Configure the HTTP request pipeline.
+app.UseStaticFiles();
+app.UseHttpsRedirection();
+
 app.UseRouting();
-app.UseSwagger();
+
+app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-app.UseStaticFiles();
+app.UseAuthentication();
+// Swagger Configuration in API  
+app.UseSwagger();
 app.UseSwaggerForOcelotUI(opt =>
 {
     opt.DownstreamSwaggerHeaders = new[]
@@ -90,12 +134,6 @@ app.UseSwaggerForOcelotUI(opt =>
                     };
 }).UseOcelot().Wait();
 
-
-//app.UseSwaggerUI();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.Run();
 

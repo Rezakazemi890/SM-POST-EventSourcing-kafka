@@ -1,5 +1,6 @@
 using CQRS.Core.Exceptions;
 using CQRS.Core.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Post.Cmd.Api.Commands;
 using Post.Common.DTOs;
@@ -9,6 +10,7 @@ namespace Post.Cmd.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[Controller]")]
+[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 public class LikePostController :ControllerBase
 {
         private readonly ILogger<LikePostController> _logger;

@@ -102,10 +102,10 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateAudience = false,
         ValidateLifetime = false,
         ValidIssuer = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
-        ValidAudience = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
+        //ValidAudience = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
     };
 });
 #endregion
@@ -139,6 +139,8 @@ static void ConfigureLogging(string environment, IConfigurationRoot configuratio
         .ReadFrom.Configuration(configuration)
         .CreateLogger();
 }
+
+#region All Elastic sink samples
 
 //For Elastic Old
 
@@ -203,6 +205,7 @@ static void ConfigureLogging(string environment, IConfigurationRoot configuratio
 //        columnOptions:columnOpt
 //    )
 //    .CreateLogger();
+#endregion
 
 builder.Host.UseSerilog();
 
