@@ -10,6 +10,7 @@ using DnsClient;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Post.Authorization.Api.DTOs;
@@ -20,6 +21,7 @@ using Post.Authorization.Infrastructure.Base;
 using Post.Authorization.Infrastructure.DataAccess;
 using Post.Common.DTOs;
 using Post.Common.Utils;
+using StackExchange.Redis;
 
 namespace Post.Authorization.Api.Controllers
 {
@@ -30,35 +32,55 @@ namespace Post.Authorization.Api.Controllers
         private readonly ILogger<AuthenticateController> _logger;
         private IConfiguration _config;
         private readonly IPostUserRepository _postUserRepository;
+        private readonly IDistributedCache _cache;
+        private readonly IConnectionMultiplexer _redis;
 
-        public AuthenticateController(ILogger<AuthenticateController> logger, IConfiguration config, IPostUserRepository postUserRepository)
+        public AuthenticateController(
+            ILogger<AuthenticateController> logger,
+            IConfiguration config,
+            IPostUserRepository postUserRepository,
+            IDistributedCache cache,
+            IConnectionMultiplexer redis)
         {
             _logger = logger;
             _config = config;
             _postUserRepository = postUserRepository;
+            _cache = cache;
+            _redis = redis;
         }
 
         private async Task<string> GenerateJSONWebToken(LoginModel userInfo)
         {
             if (await AuthenticateUser(userInfo))
             {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(_config.GetSection("Jwt").GetRequiredSection("Key").Value);
-                var tokenDescriptor = new SecurityTokenDescriptor
+                string tokenString = await _cache.GetStringAsync($"User_{userInfo.UserName}");
+                if (string.IsNullOrEmpty(tokenString))
                 {
-                    Subject = new System.Security.Claims.ClaimsIdentity(
-                        new Claim[]{
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var key = Encoding.ASCII.GetBytes(_config.GetSection("Jwt").GetRequiredSection("Key").Value);
+                    var tokenDescriptor = new SecurityTokenDescriptor
+                    {
+                        Subject = new System.Security.Claims.ClaimsIdentity(
+                            new Claim[]{
                             new Claim(ClaimTypes.Name,userInfo.UserName)
-                        }
-                    ),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-                    Issuer = _config.GetSection("Jwt").GetRequiredSection("Issuer").Value,
-                    Audience = _config.GetSection("Jwt").GetRequiredSection("Issuer").Value
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var tokenString = tokenHandler.WriteToken(token);
+                            }
+                        ),
+                        Expires = DateTime.UtcNow.AddDays(1),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                        Issuer = _config.GetSection("Jwt").GetRequiredSection("Issuer").Value,
+                        Audience = _config.GetSection("Jwt").GetRequiredSection("Issuer").Value
+                    };
+                    var token = tokenHandler.CreateToken(tokenDescriptor);
+                    tokenString = tokenHandler.WriteToken(token);
 
+                    //save token to cache
+                    var content = Encoding.UTF8.GetBytes(JsonSerializer.Serialize<string>(tokenString));
+                    await _cache.SetAsync($"User_{userInfo.UserName}", content, new DistributedCacheEntryOptions { SlidingExpiration = TimeSpan.FromDays(1) });
+                }
+                else
+                {
+                    tokenString = JsonSerializer.Deserialize<string>(tokenString);
+                }
                 return tokenString;
             }
             else
@@ -90,9 +112,9 @@ namespace Post.Authorization.Api.Controllers
                 if (data != null)
                 {
                     string tokenString = await GenerateJSONWebToken(data);
-                    
+
                     if (!string.IsNullOrEmpty(tokenString))
-                        response = Ok(new { Token =$"Bearer {tokenString}", Message = "Success Authentication" });
+                        response = Ok(new { Token = $"Bearer {tokenString}", Message = "Success Authentication" });
                 }
                 return response;
             }

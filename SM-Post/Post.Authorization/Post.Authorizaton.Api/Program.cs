@@ -12,6 +12,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.Elasticsearch;
 using System.Reflection;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -208,6 +209,22 @@ static void ConfigureLogging(string environment, IConfigurationRoot configuratio
 #endregion
 
 builder.Host.UseSerilog();
+
+#endregion
+
+#region Redis Config
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = configuration["Redis:Connection"];
+    options.InstanceName = "";
+});
+
+#region Redis Multiplexer
+
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(configuration["Redis:Connection"]));
+
+#endregion
 
 #endregion
 
