@@ -8,6 +8,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Post.Authorization.Domain.Repositories;
 using Post.Authorization.Infrastructure.Repositories;
+using Serilog;
+using Serilog.Events;
+using Serilog.Sinks.Elasticsearch;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -98,14 +102,114 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
         ValidateIssuer = true,
-        ValidateAudience = true,
+        ValidateAudience = false,
         ValidateLifetime = false,
         ValidIssuer = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
-        ValidAudience = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
+        //ValidAudience = builder.Configuration.GetSection("Jwt").GetRequiredSection("Issuer").Value,
     };
 });
 #endregion
 
+#region serilog config
+
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment}.json", optional: true)
+    .Build();
+
+ConfigureLogging(environment, configuration);
+
+
+static void ConfigureLogging(string environment, IConfigurationRoot configuration)
+{
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+        .Enrich.FromLogContext()
+        .Enrich.WithEnvironmentName()
+        .Enrich.WithMachineName()
+        .WriteTo.Console()
+        .WriteTo.Debug()
+        .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticSearch:Uri"]))
+        {
+            AutoRegisterTemplate = true,
+            AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv6,
+            IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name!.ToLower().Replace(".", "-")}-{environment?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
+        })
+        .ReadFrom.Configuration(configuration)
+        .CreateLogger();
+}
+
+#region All Elastic sink samples
+
+//For Elastic Old
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .WriteTo.Console(theme: SystemConsoleTheme.Literate)
+//    .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(builder.Configuration.GetConnectionString("elasticsearch"))) // for the docker-compose implementation
+//    {
+//        AutoRegisterTemplate = true,
+//        OverwriteTemplate = true,
+//        DetectElasticsearchVersion = true,
+//        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
+//        NumberOfReplicas = 1,
+//        NumberOfShards = 2,
+//        //BufferBaseFilename = "./buffer",
+//        //RegisterTemplateFailure = RegisterTemplateRecovery.FailSink,
+//        FailureCallback = e => Console.WriteLine("Unable to submit event " + e.MessageTemplate),
+//        EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog |
+//                           EmitEventFailureHandling.WriteToFailureSink |
+//                           EmitEventFailureHandling.RaiseCallback,
+//        FailureSink = new FileSink("./fail-{Date}.txt", new JsonFormatter(), null, null)
+//    })
+//    .CreateLogger();
+
+
+
+//with configuration
+
+//IConfigurationRoot? seriLogConfig = null;
+//if (builder.Environment.IsDevelopment())
+//{
+//    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.Development.json").Build();
+//}
+//else
+//{
+//    seriLogConfig = builder.Configuration.AddJsonFile("appsettings.json").Build();
+//}
+
+//Log.Logger = new LoggerConfiguration()
+//    .ReadFrom.Configuration(seriLogConfig)
+//    .CreateLogger();
+
+
+//var columnOpt = new Serilog.Sinks.MSSqlServer.ColumnOptions();
+//columnOpt.Store.Add(Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent);
+//columnOpt.AdditionalColumns = new Collection<SqlColumn>{
+//    new SqlColumn
+//    {
+//        ColumnName = "RequestUri",
+//        AllowNull = true,
+//        DataType = System.Data.SqlDbType.NVarChar,
+//        DataLength = 2048,
+//        PropertyName = "Uri"
+//    }
+//};
+
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Warning()
+//    .WriteTo.MSSqlServer(
+//        connectionString: builder.Configuration.GetConnectionString("SqlServer"),
+//        sinkOptions: new Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions { TableName = "LogEvent", AutoCreateSqlTable = true },
+//        columnOptions:columnOpt
+//    )
+//    .CreateLogger();
+#endregion
+
+builder.Host.UseSerilog();
+
+#endregion
 
 #region For basic JWT Authentication
 //builder.Services.AddAuthentication(option =>
@@ -135,7 +239,7 @@ builder.Services.AddAuthentication(x =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();
@@ -151,7 +255,7 @@ app.UseAuthentication();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authorization.Api");
 
 });
 

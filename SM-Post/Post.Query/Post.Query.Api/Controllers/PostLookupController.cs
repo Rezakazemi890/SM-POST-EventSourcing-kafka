@@ -1,4 +1,5 @@
 using CQRS.Core.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Post.Common.DTOs;
 using Post.Query.Api.DTOs;
@@ -9,6 +10,7 @@ namespace Post.Query.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 public class PostLookupController : ControllerBase
 {
     private readonly ILogger<PostLookupController> _logger;

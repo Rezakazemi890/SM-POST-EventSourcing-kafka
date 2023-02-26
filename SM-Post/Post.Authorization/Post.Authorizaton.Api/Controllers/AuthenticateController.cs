@@ -92,7 +92,7 @@ namespace Post.Authorization.Api.Controllers
                     string tokenString = await GenerateJSONWebToken(data);
                     
                     if (!string.IsNullOrEmpty(tokenString))
-                        response = Ok(new { Token = tokenString, Message = "Success Authentication" });
+                        response = Ok(new { Token =$"Bearer {tokenString}", Message = "Success Authentication" });
                 }
                 return response;
             }
