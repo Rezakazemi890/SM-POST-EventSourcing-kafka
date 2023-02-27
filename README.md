@@ -15,3 +15,7 @@ Mongo Db Event store
 SQL Server and Postgre Read Db 
 </br>
 Serilog and Elasticsearch integration for log Management.
+</br>
+Authentication & Authorization
+</br>
+Distributed cache (Redis)
