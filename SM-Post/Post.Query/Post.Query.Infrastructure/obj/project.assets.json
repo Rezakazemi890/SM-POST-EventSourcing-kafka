@@ -230,6 +230,25 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.14": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.10.0"
+        },
+        "compile": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "type": "package",
         "compile": {
@@ -3589,6 +3608,21 @@
         "runtimes/win-x86/native/vcruntime140.dll",
         "runtimes/win-x86/native/zlib1.dll",
         "runtimes/win-x86/native/zstd.dll"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.14": {
+      "sha512": "/XKNv0tpAQrvDgAiz63Q5HWxV/84UmOGETD2XY9HVQXX1l5yjSqRVO+SV/ceN5WOuSDCnCyzV9GhIZX6f9KItg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/6.0.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.6.0.14.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
@@ -9535,8 +9569,8 @@
     },
     "CQRS.Core/1.0.0": {
       "type": "project",
-      "path": "../../../CQRS-ES/CQRS.Core/CQRS.Core.csproj",
-      "msbuildProject": "../../../CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+      "path": "../../CQRS-ES/CQRS.Core/CQRS.Core.csproj",
+      "msbuildProject": "../../CQRS-ES/CQRS.Core/CQRS.Core.csproj"
     },
     "Post.Common/1.0.0": {
       "type": "project",
@@ -9553,6 +9587,7 @@
     "net6.0": [
       "CQRS.Core >= 1.0.0",
       "Confluent.Kafka >= 1.9.3",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.14",
       "Microsoft.EntityFrameworkCore.Proxies >= 6.0.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.10",
       "Microsoft.Extensions.Hosting >= 6.0.1",
@@ -9594,8 +9629,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
-              "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+            "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+              "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
             },
             "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Domain/Post.Query.Domain.csproj": {
               "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Domain/Post.Query.Domain.csproj"
@@ -9616,6 +9651,10 @@
           "Confluent.Kafka": {
             "target": "Package",
             "version": "[1.9.3, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[6.0.14, )"
           },
           "Microsoft.EntityFrameworkCore.Proxies": {
             "target": "Package",
@@ -9686,7 +9725,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
       }
     }
   }

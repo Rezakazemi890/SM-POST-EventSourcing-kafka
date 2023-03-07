@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "pj6939TAZZLkp1TcO+YUWaP9L4O/Dh0TchOXAWfJ8HnTZhURwu6Tj+3dTa5x0LKkREK3IKyfKS0GqKL4QtZd1g==",
+  "dgSpecHash": "L+F1HCoCTv3z/nPaW+RcTnXa6IXJFWA0cIa3g6jXYUsh8OhM79QjNQKWJLjgdqWhRE/OUkh+SPz2gtoWJSlWVg==",
   "success": true,
   "projectFilePath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Infrastructure/Post.Cmd.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "/Users/mr/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",
     "/Users/mr/.nuget/packages/elasticsearch.net/7.17.5/elasticsearch.net.7.17.5.nupkg.sha512",
     "/Users/mr/.nuget/packages/librdkafka.redist/1.9.2/librdkafka.redist.1.9.2.nupkg.sha512",
+    "/Users/mr/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.14/microsoft.aspnetcore.authentication.jwtbearer.6.0.14.nupkg.sha512",
     "/Users/mr/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/Users/mr/.nuget/packages/microsoft.csharp/4.6.0/microsoft.csharp.4.6.0.nupkg.sha512",
     "/Users/mr/.nuget/packages/microsoft.data.sqlclient/5.0.1/microsoft.data.sqlclient.5.0.1.nupkg.sha512",

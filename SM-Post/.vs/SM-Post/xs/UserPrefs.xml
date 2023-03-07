@@ -1,18 +1,28 @@
-﻿<Properties StartupConfiguration="{FFD09758-DAF9-4EA6-968C-94B489CF0DB7}|Default">
-  <MonoDevelop.Ide.ItemProperties.Post.Authorization.Post.Authorization.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <DisabledProjects>
-    <String>Post.Authorization.Api/Post.Authorization.Infrastructure/Post.Authorization.Infrastructure.csproj</String>
-    <String>Post.Authorization.Api/Post.Authorization.Domain/Post.Authorization.Domain.csproj</String>
-  </DisabledProjects>
+﻿<Properties StartupConfiguration="{9CBCFA4E-D3F0-4F54-84B5-DCCA33152E1C}|Default">
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="CmdApi&amp;QueryApi" Name="CmdApi&amp;QueryApi">
+      <Items>
+        <StartupItem ItemId="{991A8454-698D-4E46-9001-AE5E3541B162}" ItemName="OcelotGateway" ConfigurationId="Default" />
+        <StartupItem ItemId="{FFD09758-DAF9-4EA6-968C-94B489CF0DB7}" ItemName="Post.Authorization.Api" ConfigurationId="Default" />
+        <StartupItem ItemId="{CF7C05FF-2E24-472E-AA58-90D1E3908314}" ItemName="Post.Cmd.Api" ConfigurationId="Default" />
+        <StartupItem ItemId="{9CBCFA4E-D3F0-4F54-84B5-DCCA33152E1C}" ItemName="Post.Query.Api" ConfigurationId="Default" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
   <MonoDevelop.Ide.ItemProperties.Post.Cmd.Post.Cmd.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.ItemProperties.Post.Query.Post.Query.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs">
+  <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/Program.cs" relfile="Post.Query/Post.Query.Api/Program.cs" line="49" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Post.Query/Post.Query.Api/appsettings.json">
     <Files>
-      <File FileName="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" Line="68" Column="31" />
-      <File FileName="Post.Authorization/Post.Authorizaton.Api/Program.cs" Line="27" Column="1" />
-      <File FileName="Post.Query/Post.Query.Api/Program.cs" Line="41" Column="1" />
+      <File FileName="Post.Query/Post.Query.Api/Program.cs" Line="54" Column="1" />
+      <File FileName="Post.Query/Post.Query.Api/appsettings.Development.json" Line="14" Column="40" />
+      <File FileName="Post.Query/Post.Query.Api/appsettings.json" Line="14" Column="40" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,44 +31,43 @@
             <Node name="Post.Authorization" expanded="True">
               <Node name="Post.Authorization.Api" expanded="True">
                 <Node name="Controllers" expanded="True" />
+                <Node name="Properties" expanded="True" />
                 <Node name="appsettings.json" expanded="True" />
               </Node>
-              <Node name="Post.Authorization.Infrastructure" expanded="True">
-                <Node name="DataAccess" expanded="True" />
+            </Node>
+            <Node name="Post.Cmd" expanded="True">
+              <Node name="Post.Cmd.Api" expanded="True">
+                <Node name="Properties" expanded="True" />
+                <Node name="appsettings.json" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="Post.Gateway" expanded="True">
+              <Node name="OcelotGateway" expanded="True">
+                <Node name="Properties" expanded="True" />
+                <Node name="appsettings.json" expanded="True" />
               </Node>
             </Node>
             <Node name="Post.Query" expanded="True">
               <Node name="Post.Query.Api" expanded="True">
-                <Node name="Controllers" expanded="True" />
-                <Node name="appsettings.json" expanded="True" />
+                <Node name="Properties" expanded="True" />
+                <Node name="appsettings.json" expanded="True" selected="True">
+                  <Node name="appsettings.Development.json" expanded="True" />
+                </Node>
               </Node>
-              <Node name="Post.Query.Infrastructure" expanded="True">
-                <Node name="DataAccess" expanded="True" />
-              </Node>
+            </Node>
+            <Node name="docker-compose" expanded="True">
+              <Node name="docker-compose.yml" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
-      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/Controllers/RestoreReadDbController.cs" relfile="Post.Cmd/Post.Cmd.Api/Controllers/RestoreReadDbController.cs" line="41" column="1" />
-      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" relfile="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" line="79" column="1" />
-      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" relfile="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" line="61" column="1" />
-      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" relfile="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" line="34" column="1" />
-      <Breakpoint file="/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" relfile="Post.Authorization/Post.Authorizaton.Api/Controllers/AuthenticateController.cs" line="94" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations>
-    <MultiItemSolutionRunConfiguration Id="CmdApi&amp;QueryApi" Name="CmdApi&amp;QueryApi">
-      <Items>
-        <StartupItem ItemId="{CF7C05FF-2E24-472E-AA58-90D1E3908314}" ItemName="Post.Cmd.Api" ConfigurationId="Default" />
-        <StartupItem ItemId="{9CBCFA4E-D3F0-4F54-84B5-DCCA33152E1C}" ItemName="Post.Query.Api" ConfigurationId="Default" />
-      </Items>
-    </MultiItemSolutionRunConfiguration>
-  </MultiItemStartupConfigurations>
+  <MonoDevelop.Ide.ItemProperties.Post.Gateway.OcelotGateway PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Post.Query.Post.Query.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.ItemProperties.Post.Authorization.Post.Authorization.Api PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <DisabledProjects>
+    <String>Post.Authorization.Api/Post.Authorization.Infrastructure/Post.Authorization.Infrastructure.csproj</String>
+    <String>Post.Authorization.Api/Post.Authorization.Domain/Post.Authorization.Domain.csproj</String>
+  </DisabledProjects>
 </Properties>

@@ -1,15 +1,15 @@
 ﻿{
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5003"
+    "BaseUrl": "http://localhost:5003"
   },
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5010
+          "Port": 5006
         }
       ],
       "UpstreamPathTemplate": "/api/authorization/{version}/{everything}",
@@ -27,11 +27,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/postcmd/{version}/{everything}",
@@ -49,11 +49,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/{version}/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5012
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/api/postquery/{version}/{everything}",
@@ -77,7 +77,7 @@
         {
           "Name": "Authorization.Api",
           "Version": "v1",
-          "Url": "https://localhost:5010/swagger/v1/swagger.json"
+          "Url": "http://localhost:5006/swagger/v1/swagger.json"
         }
       ]
     },
@@ -87,7 +87,7 @@
         {
           "Name": "Post.Cmd.Api",
           "Version": "v1",
-          "Url": "https://localhost:5011/swagger/v1/swagger.json"
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
         }
       ]
     },
@@ -97,7 +97,7 @@
         {
           "Name": "Post.Query.Api",
           "Version": "v1",
-          "Url": "https://localhost:5012/swagger/v1/swagger.json"
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     }
