@@ -1,26 +1,169 @@
 version: '3.4'
 
 services:
+###############################################################Post authorization api
   post.authorization.api:
     image: ${DOCKER_REGISTRY-}postauthorization
+    depends_on:
+      - sqldb
+      - elasticsearch
+      - redis
     build:
       context: .
       dockerfile: Post.Authorization/Post.Authorizaton.Api/Dockerfile
-
+    environment:
+      ConnectionStrings__AuthorizerConnectionString: "Server=sqldb;Database=Authorization;User Id=sa;Password=@P@ssw0rd02;Encrypt=False"
+      ElasticSearch__Uri: "http://elasticsearch:9200"
+      Redis__Connection: "redis:9191,password=123456"
+###############################################################Post cmd api
   post.cmd.api:
     image: ${DOCKER_REGISTRY-}postcmd
+    depends_on:
+      - sqldb
+      - elasticsearch
+      - mongo
+      - kafka
     build:
       context: .
       dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
-
+    environment:
+      ConnectionStrings__SqlServer: "Server=sqldb;Database=SocialMedia;User Id=sa;Password=@P@ssw0rd02;Encrypt=False"
+      ElasticSearch__Uri: "http://elasticsearch:9200"
+      MongoDbConfig__ConnectionString: "mongodb://mongo:27017"
+      MongoDbConfig__DataBase: "socialMedia"
+      MongoDbConfig__Collection: "eventStore"
+      ProducerConfig__BootstrapServers: "kafka:9092"
+###############################################################Ocelot Gateway
   ocelotgateway:
     image: ${DOCKER_REGISTRY-}ocelotgateway
+    depends_on:
+      - post.authorization.api
+      - post.cmd.api
+      - post.query.api
     build:
       context: .
       dockerfile: OcelotGateway/Dockerfile
-
+###############################################################Post query api
   post.query.api:
     image: ${DOCKER_REGISTRY-}postquery
+    depends_on:
+      - sqldb
+      - elasticsearch
+      - kafka
     build:
       context: .
       dockerfile: Post.Query/Post.Query.Api/Dockerfile
+    environment:
+      ConnectionStrings__SqlServer: "Server=sqldb;Database=SocialMedia;User Id=sa;Password=@P@ssw0rd02;Encrypt=False"
+      ElasticSearch__Uri: "http://elasticsearch:9200"
+      ConsumerConfig__GroupId: "SM_Consumer"
+      ConsumerConfig__BootstrapServers: "kafka:9092"
+      ConsumerConfig__EnableAutoCommit: "false"
+      ProducerConfig__AutoOffsetReset: "Earliest"
+      ProducerConfig__AllowAutoCreateTopics: "true"
+###############################################################Sql server
+  sqldb:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    container_name: sql-container-p
+    cap_add: [ 'SYS_PTRACE' ]
+    environment:
+      - "ACCEPT_EULA=1"
+      - "MSSQL_SA_PASSWORD=@P@ssw0rd02"
+    ports:
+      - "1433:1433"
+    hostname: mssql
+    volumes:
+      - "mssql-azuresql-edge-data:/var/opt/mssql"
+###############################################################Mongo
+  mongo:
+    image: mongo:latest
+    container_name: mongo-container-p
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+###############################################################Redis distributed cache
+  redis:
+    image: redis:latest
+    container_name: RedisCache-p
+    restart: always
+    ports:
+      - '9191:6379'
+    command: redis-server --loglevel warning --requirepass 123456
+    volumes: 
+      - cache:/data
+###############################################################Kafka and zookeeper
+  zookeeper:
+    image: bitnami/zookeeper
+    container_name: zookeeper-p
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: bitnami/kafka
+    container_name: kafka-p
+    ports:
+      - "9092:9092"
+    restart: always
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+    depends_on:
+      - zookeeper
+###############################################################Elastic and kibana
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.1
+    container_name: elasticsearch-p
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    restart: always
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  kibana:
+    depends_on:
+      - elasticsearch
+    image: docker.elastic.co/kibana/kibana:8.6.1
+    container_name: kibana-p
+    volumes:
+      - kibana-data:/usr/share/kibana/data
+    ports:
+     - "5601:5601"
+    restart: always
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+###############################################################Volumes
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  kibana-data:
+    driver: local
+  mongodb_data_container:
+    driver: local
+  cache:
+    driver: local
+  mssql-azuresql-edge-data:
+    driver: local
+###############################################################Networks
+networks:
+  default:
+    external:
+      name: mydockernetwork

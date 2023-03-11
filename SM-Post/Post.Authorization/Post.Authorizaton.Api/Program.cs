@@ -19,6 +19,8 @@ var builder = WebApplication.CreateBuilder(args);
 //DbContext and connection string
 var connectionString = builder.Configuration.GetConnectionString("AuthorizerConnectionString");
 
+Console.WriteLine(connectionString);
+
 builder.Services.AddDbContext<AuthorizationDbContext>(options =>
     options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
@@ -139,6 +141,8 @@ static void ConfigureLogging(string environment, IConfigurationRoot configuratio
         })
         .ReadFrom.Configuration(configuration)
         .CreateLogger();
+
+    Console.WriteLine(configuration["ElasticSearch:Uri"]);
 }
 
 #region All Elastic sink samples
@@ -224,6 +228,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddSingleton<IConnectionMultiplexer>(provider => ConnectionMultiplexer.Connect(configuration["Redis:Connection"]));
 
+Console.WriteLine(configuration["Redis:Connection"]);
 #endregion
 
 #endregion
