@@ -21,11 +21,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore SM-Post.sln
       working-directory: ./SM-Post
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build SM-Post.sln --no-restore
       working-directory: ./SM-Post
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test SM-Post.sln --no-build --verbosity normal
       working-directory: ./SM-Post
