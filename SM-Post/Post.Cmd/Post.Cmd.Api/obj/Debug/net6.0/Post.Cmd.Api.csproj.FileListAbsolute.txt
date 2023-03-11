@@ -10,6 +10,7 @@
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Confluent.Kafka.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/DnsClient.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Elasticsearch.Net.dll
+/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Microsoft.Data.SqlClient.dll
 /Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Api/bin/Debug/net6.0/Microsoft.Extensions.Configuration.dll

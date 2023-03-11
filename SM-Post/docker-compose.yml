@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  post.authorization.api:
+    image: ${DOCKER_REGISTRY-}postauthorization
+    build:
+      context: .
+      dockerfile: Post.Authorization/Post.Authorizaton.Api/Dockerfile
+
+  post.cmd.api:
+    image: ${DOCKER_REGISTRY-}postcmd
+    build:
+      context: .
+      dockerfile: Post.Cmd/Post.Cmd.Api/Dockerfile
+
+  ocelotgateway:
+    image: ${DOCKER_REGISTRY-}ocelotgateway
+    build:
+      context: .
+      dockerfile: OcelotGateway/Dockerfile
+
+  post.query.api:
+    image: ${DOCKER_REGISTRY-}postquery
+    build:
+      context: .
+      dockerfile: Post.Query/Post.Query.Api/Dockerfile

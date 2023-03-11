@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Text;
@@ -40,6 +41,8 @@ else
     configureDbContext =
         (o => o.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 }
+
+Console.WriteLine(builder.Configuration.GetConnectionString("SqlServer"));
 
 builder.Services.AddDbContext<DatabaseContext>(configureDbContext);
 builder.Services.AddSingleton<DatabaseContextFactory>(new DatabaseContextFactory(configureDbContext));

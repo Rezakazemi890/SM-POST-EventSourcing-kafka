@@ -4,14 +4,14 @@
     "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Api/Post.Query.Api.csproj": {}
   },
   "projects": {
-    "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+    "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj",
+        "projectUniqueName": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj",
         "projectName": "CQRS.Core",
-        "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj",
+        "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj",
         "packagesPath": "/Users/mr/.nuget/packages/",
-        "outputPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/obj/",
+        "outputPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/mr/.nuget/NuGet/NuGet.Config"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -85,8 +85,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
-                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+              "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
               }
             }
           }
@@ -116,7 +116,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -142,8 +142,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
-                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+              "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
               },
               "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/Post.Common.csproj": {
                 "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/Post.Common.csproj"
@@ -191,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -217,8 +217,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
-                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+              "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
               },
               "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/Post.Common.csproj": {
                 "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Common/Post.Common.csproj"
@@ -251,7 +251,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -277,8 +277,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
-                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
+              "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj": {
+                "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/CQRS-ES/CQRS.Core/CQRS.Core.csproj"
               },
               "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Domain/Post.Query.Domain.csproj": {
                 "projectPath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Query/Post.Query.Domain/Post.Query.Domain.csproj"
@@ -299,6 +299,10 @@
             "Confluent.Kafka": {
               "target": "Package",
               "version": "[1.9.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
@@ -369,7 +373,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     }

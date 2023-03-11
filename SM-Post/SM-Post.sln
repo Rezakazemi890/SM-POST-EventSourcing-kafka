@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Core", "..\CQRS-ES\CQRS.Core\CQRS.Core.csproj", "{24D92E31-4416-4499-BAA1-C7C4E68D346E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Core", "CQRS-ES\CQRS.Core\CQRS.Core.csproj", "{24D92E31-4416-4499-BAA1-C7C4E68D346E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Post.Cmd", "Post.Cmd", "{122EAA92-4F8C-45F8-A34D-0307F7DE21B9}"
 EndProject
@@ -34,6 +34,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Post.Gateway", "Post.Gateway", "{2880A28E-4C16-4EB7-B1E9-5E6252975C49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "OcelotGateway\OcelotGateway.csproj", "{991A8454-698D-4E46-9001-AE5E3541B162}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{75C80809-B064-4A5E-AD1C-A271E2543924}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,6 +94,10 @@ Global
 		{991A8454-698D-4E46-9001-AE5E3541B162}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{991A8454-698D-4E46-9001-AE5E3541B162}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{991A8454-698D-4E46-9001-AE5E3541B162}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75C80809-B064-4A5E-AD1C-A271E2543924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C80809-B064-4A5E-AD1C-A271E2543924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C80809-B064-4A5E-AD1C-A271E2543924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C80809-B064-4A5E-AD1C-A271E2543924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CF7C05FF-2E24-472E-AA58-90D1E3908314} = {122EAA92-4F8C-45F8-A34D-0307F7DE21B9}

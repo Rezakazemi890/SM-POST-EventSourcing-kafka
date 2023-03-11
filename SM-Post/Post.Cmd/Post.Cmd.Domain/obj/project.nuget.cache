@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "djxP3QBU3EeEP2cgrr7fpocP4wT5obtJe+tEJszwkhwrNhMgpsrNBCLhf/rIVzZiTkBI76zhElo2pnZhdNcufQ==",
+  "dgSpecHash": "UTMLQR3vzGQ/beLjf975QduROoG+HLtz8VNdzzxoS0Rgnib8dTF3QSP8JpQMNQuUUfAaGKbODoz2OxuvR/vQ4A==",
   "success": true,
   "projectFilePath": "/Users/mr/Projects/Udemy-CQRS/Project/Source/SM-Post/Post.Cmd/Post.Cmd.Domain/Post.Cmd.Domain.csproj",
   "expectedPackageFiles": [
