@@ -16,19 +16,23 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repository:
 
 
-```git clone https://github.com/Rezakazemi890/SM-POST-EventSourcing-kafka.git```
+```bash 
+git clone https://github.com/Rezakazemi890/SM-POST-EventSourcing-kafka.git
+```
 
 
 2. Navigate to the project directory:
 
-
-```cd SM-POST-EventSourcing-kafka```
+```bash 
+cd SM-POST-EventSourcing-kafka
+```
 
 
 3. Run Docker Compose:
 
-
-```docker-compose up```
+```bash 
+docker-compose up
+```
 
 
 This will start all the required services and microservices.
